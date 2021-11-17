@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const LoginForm = () => {
   //   const [cookie, setCookie] = useCookies["user"];
@@ -72,15 +75,67 @@ const LoginForm = () => {
   //   // router.push(returnUrl);
   // }
 
+
+  //------Bonnie's Test----------
+
+  const [userData, setUserData] = useState({ username: "", password: "" });
+  const [errorMessage, setErrorMessage] = useState({ value: "" });
+  // const history = useHistory();
+  //console.log("auth", localStorage.getItem("isAuthenticated"));
+
+  const handleInputChange = (e) => {
+    setUserData((prevState) => {
+      return {
+        ...prevState,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //if username or password field is empty, return error message
+    if (userData.username === "" || userData.password === "") {
+      setErrorMessage((prevState) => ({
+        value: "Empty username/password field",
+      }));
+    } else if (userData.username == "admin" && userData.password == "123456") {
+      //Signin Success
+      localStorage.setItem("isAuthenticated", "true");
+      window.location.pathname = "/";
+    } else {
+      //If credentials entered is invalid
+      setErrorMessage((prevState) => ({ value: "Invalid username/password" }));
+    }
+  };
+
+
   return (
     <form onSubmit={onSubmit} method="post">
       <div className="form-group">
-        <input name="username" type="text" placeholder="Username" />
+        <input 
+        name="username" 
+        type="text" 
+        placeholder="Username"
+        onChange={(e)=>handleInputChange(e)}
+        
+        />
       </div>
       <div className="form-group">
-        <input name="password" type="password" placeholder="Password" />
+        <input 
+        name="password" 
+        type="password" 
+        placeholder="Password" 
+        onChange={(e)=>handleInputChange(e)}
+        
+        />
       </div>
-      <button className="btn btn-primary loginBtn">Login</button>
+      <button 
+      type="submit"
+      className="btn btn-primary loginBtn"
+      onClick={handleSubmit}
+      >  
+        Login</button>
       <style jsx>{`
         form {
           display: flex;

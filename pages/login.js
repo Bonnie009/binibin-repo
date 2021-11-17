@@ -6,7 +6,12 @@ import GuestNavBar from "../comps/GuestNavBar";
 import Header from "../comps/HeaderText";
 import Footer from "../comps/footer";
 import Image from "next/image";
-import LoginComp from "../comps/LoginForm";
+import LoginForm from "../comps/LoginForm";
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ProtectedRoute from "../comps/ProtectedRoute";
+import Dashboard from '../pages/dashboard';
+
 
 const PageCont = styled.div`
   display: flex;
@@ -109,8 +114,19 @@ export default function Login() {
       <MidCont>
         <RightCont>
           <Header text="Login"></Header>
-          <LoginComp></LoginComp>
+
+        <LoginForm></LoginForm>
+          <BrowserRouter>
+          <Routes>
+            <Route exact path="/login" comp={LoginForm}/>
+            <Route exact path ="/" comp={Dashboard}/>
+            </Routes>
+          </BrowserRouter>
+
+
         </RightCont>
+
+
 
         <LeftCont>
           <Image src={"/6162.png"} width={853} height={447} />

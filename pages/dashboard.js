@@ -11,6 +11,7 @@ import UserNav from '../comps/UserNav';
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { useDispatch } from "react-redux";
 
 
 const PageCont = styled.div`
@@ -82,7 +83,16 @@ const fakeData = [{
 
 export default function Dashboard() {
 
+  const dispatch = useDispatch();
 
+  useEffect(()=>{
+    dispatch(getAllPosts());
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.pathname = "/login"
+  };
 
   return (
     //<div className={styles.container}>
@@ -134,6 +144,8 @@ export default function Dashboard() {
         <Subhead text='Customer Support' fontsize='24px'></Subhead>
       </IconDiv>
     </BotRow>  
+
+    <button className="btn" onClick={handleLogout}>Logout</button>
 
 
     <FooterCont>
