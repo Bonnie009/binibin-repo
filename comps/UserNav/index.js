@@ -54,12 +54,6 @@ const SubHeader = styled.h2`
   color: white;
 `;
 
-export async function getStaticProps(context) {
-  return {
-    props: { data }, // will be passed to the page component as props
-  };
-}
-
 const UserNav = ({ router = useRouter(), displayName = "Username" }) => {
   return (
     <NavCont>
