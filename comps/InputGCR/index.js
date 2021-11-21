@@ -54,6 +54,8 @@ const Submit = styled.input`
 // -----------------CART COMP----------------------------
 const CartCont = styled.div`
   display:flex;
+  flex-wrap:wrap;
+  flex:1;
   border: 5px solid #003274;
   border-radius:10px;
   flex-direction:column;
@@ -88,11 +90,15 @@ const ItemQuantity = styled.p`
 
 //-------------------------Notes Input------------------------
 const TextG = styled.p`
-
+  
 `
 
 const TextCont = styled.div`
   display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100px;
+  word-break: break-all;
 `
 
 const TopCart = styled.div`
@@ -102,8 +108,10 @@ const TopCart = styled.div`
 `
 const BotCart = styled.div`
   display:flex;
-  justify-content:space-around;
+  width:100%;
+  justify-content:space-between;
   flex:1;
+  padding:10px;
 `
 
 
@@ -144,19 +152,17 @@ function clickGarbage(){
 
 //To display text 
 
-  
-
   var getGarbageText = document.getElementById("garbageText").value; 
   
   localStorage.setItem('getGarbageText', getGarbageText)
   
   var existing = localStorage.getItem('garbageText');
 
-  var data = existing ? existing + getGarbageText : 'tuna';
+  var data = existing ? existing + " " + getGarbageText + ", ": ' ';
 
   localStorage.setItem('garbageText', data);
 
-  document.getElementById("TextGarbage").innerHTML = data + " " ;
+  document.getElementById("TextGarbage").innerHTML = data;
 
 
 } // END OF clickGarbage function
@@ -171,7 +177,23 @@ function clickCompost(){
 
   var compostText = document.getElementById("compostText").value; 
   document.getElementById("TextCompost").innerHTML = compostText;
-}
+
+  //To display text
+
+  var getCompostText = document.getElementById("compostText").value; 
+  
+  localStorage.setItem('getCompostText', getCompostText)
+  
+  var existing = localStorage.getItem('compostText');
+
+  var data = existing ? existing + " "  + getCompostText + ", ": ' ';
+
+  localStorage.setItem('compostText', data);
+
+  document.getElementById("TextCompost").innerHTML = data;
+
+
+} //END OF clickCompost function
 
 //---------CLICK RECYCLE FUNCTION-----------
 
@@ -182,7 +204,23 @@ function clickRecycle(){
 
   var recycleText = document.getElementById("recycleText").value; 
   document.getElementById("TextRecycle").innerHTML = recycleText;
-}
+
+  //To display text
+
+  var getRecycleText = document.getElementById("recycleText").value; 
+  
+  localStorage.setItem('getRecycleText', getRecycleText)
+  
+  var existing = localStorage.getItem('recycleText');
+
+  var data = existing ? existing + " " + getRecycleText + ", ": ' ' ;
+
+  localStorage.setItem('recycleText', data);
+
+  document.getElementById("TextRecycle").innerHTML = data;
+
+
+} //END OF clickRecycle function
 
   return <PageCont>
 
